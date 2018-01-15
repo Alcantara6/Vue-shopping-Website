@@ -1,0 +1,46 @@
+{
+  "status":0,
+  "message":"",
+  "result":[
+    {
+      "addressId":"100001",
+      "userName":"Alcantara",
+      "streetName":"四川省成都市高新区",
+      "postCode":"100001",
+      "tel":"13088889999",
+      "isDefault":true
+    },
+    {
+      "addressId":"100002",
+      "userName":"Bob",
+      "streetName":"四川省绵阳市涪城区",
+      "postCode":"100001",
+      "tel":"13911112222",
+      "isDefault":false
+    },
+    {
+      "addressId":"100003",
+      "userName":"Thomas",
+      "streetName":"江苏省南京市江宁区",
+      "postCode":"100001",
+      "tel":"15677778888",
+      "isDefault":false
+    },
+    {
+      "addressId":"100004",
+      "userName":"Lee",
+      "streetName":"香港特别行政区九龙",
+      "postCode":"100001",
+      "tel":"89892222",
+      "isDefault":false
+    },
+    {
+      "addressId":"100005",
+      "userName":"Wang Fu",
+      "streetName":"北京市石景山区",
+      "postCode":"100001",
+      "tel":"18955556666",
+      "isDefault":false
+    }
+  ]
+}
