@@ -8,6 +8,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+// 配置本地数据访问第一步
+var appData = require('../productList.json');
+var status = appData.status;
+var message = appData.message;
+var result = appData.result;
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -35,6 +41,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    // 配置本地数据访问第二步
+    before(app) {
+      app.get('/api/result', (req,res) => {
+        res.json({
+          errno: 0,
+          data: result
+        });
+      });
     }
   },
   plugins: [

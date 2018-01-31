@@ -19,9 +19,7 @@ export default {
 }
 html,
 body {
-    font: 
-        12px/1.5 
-        Tahoma, Helvetica, Arial, "Microsoft YaHei", "Hiragino GB", Sans-serif;
+    font: 12px/1.5 Tahoma, Helvetica, Arial, "Microsoft YaHei", "Hiragino GB", Sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

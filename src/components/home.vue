@@ -127,7 +127,7 @@
         </div>
         <!--   删除对话框组件 -->
         <!-- v-show控制出现，v-on自定义事件确认删除和取消删除 -->
-        <dialog-delete v-show="showDeleteBox" v-on:confirmDel="confirmDel" v-on:cancelDel="showDeleteBox = false"></dialog-delete>
+        <dialog-delete :isShow="isShowDialog" v-on:confirmDel="confirmDel" v-on:cancelDel="isShowDialog = false"></dialog-delete>
     </div>
 </template>
 
@@ -142,7 +142,7 @@ export default {
       return {
         productList:[],
         selectAllFlag:false,
-        showDeleteBox:false,
+        isShowDialog:false,
         deleteNth:0
       }
     },
@@ -185,12 +185,17 @@ export default {
 
     methods:{
       cartView() {
-        this.$axios.get("../static/productList.json",{id:"productlist"})
+        this.$axios.get("/api/result",{id:"productlist"})
           .then(response => {
             // 箭头函数的this固定指向外层调用者
-            this.productList = response.data.result.list;
+            this.productList = response.data.data.list;
             // this.totalMoney = response.data.result.totalMoney;
           });
+          this.$axios.post("http://localhost:8080/api/result",{id:"productlist"})
+            .then(response => {
+              // 箭头函数的this固定指向外层调用者
+              console.log(response);
+            });
       },
 
       // 事件-改变数量
@@ -252,14 +257,14 @@ export default {
       // 事件-点击删除某项后弹框，传入序号。
       // 之后确认事件时不知道删除哪一项，所以向data里的变量传入index
       delItem(index) {
-        this.showDeleteBox = true;
+        this.isShowDialog = true;
         this.deleteNth = index;
       },
 
       // 确认删除。实际业务中会将id等信息传到后台删除
       confirmDel() {
         this.productList.splice(this.deleteNth,1);
-        this.showDeleteBox = false;
+        this.isShowDialog = false;
       }
     }
 }
@@ -298,7 +303,6 @@ export default {
     padding: 0 1em;
     font-size: 20px;
     background: #fff;
-    z-index: 1;
 }
 
 /* 2-1.购物车列表-标题 */
@@ -359,7 +363,6 @@ export default {
     font-weight: 700;
 }
 .item-include {
-    position: relative;
     width: 150px;
 }
 .item-include dt {

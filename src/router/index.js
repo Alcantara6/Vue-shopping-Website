@@ -1,3 +1,5 @@
+// order页面使用了重定向
+
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -20,11 +22,9 @@ export default new Router ({
 	  {
 		path:'/order',
 		component:orderProcedure,
-		children:[
-			{
-				path:'',
-				component:postAddress
-			},			
+        // 使用重定向
+		redirect: '/order/address',
+		children:[			
 			{
 				path:'address',
 				component:postAddress
