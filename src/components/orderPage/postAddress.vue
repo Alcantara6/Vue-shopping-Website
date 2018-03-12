@@ -6,16 +6,19 @@
 			</h2>
 			<!-- 事件触发样式改变：将v-bind:class、index、currentIndex、click互相关联 -->
 			<!-- 
-			  鼠标进入显示设为默认、编辑、删除元素，不能用CSS的hover，因为要显示的元素是hover元素的子元素。用事件函数，每个列表项添加appear属性。
-			  如果不是为了用函数添加appear属性，可以用@mouseover="item.appear = index === currentIndex"
-			-->			
+				鼠标进入显示设为默认、编辑、删除元素，不能用CSS的hover，因为要显示的元素是hover元素的子元素。
+				用事件函数，每个列表项添加appear属性。
+				如果不是为了用函数添加appear属性，可以用@mouseover="item.appear = index === currentIndex"
+			-->		
+			
+			<!-- 地址卡片 -->
 			<ul>	
 				<li 
-				:class="[{'selected':index === currentIndex},'adr-list-card']"
-				v-for="(item,index) in filterAddress" 
-				@mouseover="showAdrEdite(item)" 
-				@mouseout="item.appear = false" 
-				@click="currentIndex = index">
+				    :class="[{'selected':index === currentIndex},'adr-list-card']"
+				    v-for="(item,index) in filterAddress" 
+				    @mouseover="showAdrEdite(item)" 
+				    @mouseout="item.appear = false" 
+				    @click="currentIndex = index">
 					<h3 v-text="item.userName"></h3>
 					<p v-text="item.streetName"></p>
 					<br>
@@ -24,11 +27,11 @@
 					<!-- 根据appear属性决定是否显示设为默认、编辑、删除按钮 -->
 					<template v-if="item.appear">
 						<a 
-						class="set-default-address" 
-						href="javascript:void(0)"
-						v-if="!item.isDefault" 
-						@click="setAsDefaultAdr(item)">
-						设为默认地址
+						    class="set-default-address" 
+						    href="javascript:void(0)"
+						    v-if="!item.isDefault" 
+						    @click="setAsDefaultAdr(item)">
+						    设为默认地址
 						</a>
 						<i class="iconfont icon-edit"></i>
 						<i class="iconfont icon-delete" @click="deleteAddress(index)"></i>
@@ -42,21 +45,23 @@
 			<!-- 地址列表展开和收起 -->
 			<div class="more-address">
 				<a 
-				href="javascript:void(0)" 
-				v-if="addressNum === addressList.length" 
-				v-on:click="addressNum = 3">
-				收起
-				<i class="iconfont icon-up"></i>
+				    href="javascript:void(0)" 
+				    v-if="addressNum === addressList.length" 
+				    v-on:click="addressNum = 3">
+				    收起
+				    <i class="iconfont icon-up"></i>
 				</a>
 				<a 
-				href="javascript:void(0)"
-				v-else  
-				v-on:click="addressNum = addressList.length">
-				more
-				<i class="iconfont icon-down"></i>
+				    href="javascript:void(0)"
+				    v-else  
+				    v-on:click="addressNum = addressList.length">
+				    more
+				    <i class="iconfont icon-down"></i>
 				</a>
 			</div>	
 		</section>
+
+		<!-- 配送选项 -->
 		<section id="shipping">
 			<h2 class="shipping-title">
 				<span>配送方式</span>
@@ -68,7 +73,7 @@
 				</li>
 				<li :class="{'selected':shippingMethod === 2}" @click="shippingMethod = 2">
 					<h3>高级配送</h3>
-					<p>180</p>					
+					<p>180</p>				
 				</li>
 			</ul>
 		</section>
@@ -86,11 +91,7 @@ export default {
 			shippingMethod:1
 		}
 	},
-	mounted() {
-		this.$nextTick(function () {
-			this.addressView();
-		});
-	},
+
 	// 先缓存filterAddress，页面仅显示3条
 	computed:{
 		filterAddress() {
@@ -128,7 +129,13 @@ export default {
 		deleteAddress(index) {
 			this.addressList.splice(index,1);
 		}
-	}
+	},
+
+	mounted() {
+		this.$nextTick(function () {
+			this.addressView();
+		});
+	},
 }
 </script>
 
@@ -136,7 +143,8 @@ export default {
 /* 通用-- part2和part3的标题抬头*/
 .address-title,
 .shipping-title {
-	position: relative;  /* 水平线的基准*/
+	/* 水平线的基准*/
+	position: relative;  
 	margin-bottom: 30px;
 	text-align: center;	
 }

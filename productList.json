@@ -1,7 +1,7 @@
 {
 	"status":1, 
-	"message":"",
-	"result":{
+	"messages":"",
+	"results":{
 		"totalMoney":0,
 		"list":[
 			{

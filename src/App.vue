@@ -42,6 +42,5 @@ a:visited {
 a img,
 div img {
 	vertical-align: top;
-	/* display: block; */
 }
 </style>

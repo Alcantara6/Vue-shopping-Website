@@ -11,7 +11,12 @@
 		</keep-alive>
 		<footer>
 			<!-- 原生事件需要加.native-->
-			<router-link class="next-step-btn" :to="currentRouter" @click.native="gotoNextStep">下一步</router-link>
+			<router-link 
+				class="next-step-btn" 
+				:to="currentRouter" 
+				@click.native="gotoNextStep">
+				下一步
+			</router-link>
 		</footer>
 	</div>
 </template>
@@ -27,7 +32,7 @@ export default {
 				"pay",       //next--3
 				"confirm"    //next--4-another
 			],
-			stepIndex:1
+			stepIndex: 1
 		}
 	},
 	computed:{

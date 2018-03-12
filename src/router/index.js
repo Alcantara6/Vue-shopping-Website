@@ -1,5 +1,4 @@
 // order页面使用了重定向
-
 import Vue from 'vue'
 import Router from 'vue-router'
 

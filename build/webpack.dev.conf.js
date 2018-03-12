@@ -12,7 +12,8 @@ const portfinder = require('portfinder')
 var appData = require('../productList.json');
 var status = appData.status;
 var message = appData.message;
-var result = appData.result;
+var results = appData.results;
+var list = appData.results.list;
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -44,10 +45,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     // 配置本地数据访问第二步
     before(app) {
-      app.get('/api/result', (req,res) => {
+      app.get('/api/list', (req,res) => {
         res.json({
           errno: 0,
-          data: result
+          data: list
+        });
+      });
+      app.post('/api/list', (req,res) => {
+        res.json({
+          errno: 0,
+          data: list
         });
       });
     }

@@ -1,12 +1,12 @@
 <!-- 1.25
-修改dialog的css 
+    修改dialog的css 
 -->
 <!-- 1.26 
-.box-top span:hover 
-关闭dialog通过父传子props，原为事件传递
+    .box-top span:hover 
+    通过父传子props来关闭dialog，原为事件传递
 -->
 <!-- 1.31 
-对话框增加淡入淡出过渡
+    对话框增加淡入淡出过渡
 -->
 <template>
 <transition name="dialog">
@@ -80,11 +80,14 @@ export default {
 #dialog-delete-box {
 	position: fixed;
 	width: 50%;
-	max-height: 50%;        /*最大屏幕高度的50% */  /*（margin的高度100%是基于父元素的宽度）*/
+	/*最大屏幕高度的50% */  
+	/*（margin的高度100%是基于父元素的宽度）*/
+	max-height: 50%;        
 	top: 20%;
 	left: 50%;
 	overflow: auto;
-	margin-left: -25%;       /*居中*/
+	/*居中*/
+	margin-left: -25%;       
 	background: #fefcff;
 	z-index:999;
 }

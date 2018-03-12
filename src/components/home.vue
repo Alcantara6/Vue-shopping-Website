@@ -1,31 +1,9 @@
 <template>
     <div id="home">
-        <!--复杂的渲染数据方式-->
-        <!--  
-            <ul>每一行商品
-                <li v-for="goods in productList" class="productLine">
-                    每一列
-                    <template v-for="(value,key) in goods">
-                        如果该项不是数组或对象，且不含“images”，渲染该项
-                        <div 
-                        :class=key 
-                        v-text="value" 
-                        v-if="typeof value !== "object" && value.indexOf("images") === -1" >
-                        </div>
-                        如果该项是数组或对象，渲染parts键
-                        <div v-if="typeof value === "object"">
-                            <span class="parts" v-for="part in value"  v-text="part.partsName"></span>
-                        </div>
-                        如果该项含images，渲染图片元素
-                        <img v-if="value.indexOf("images") !== -1" :src="value" :alt="商品图">
-                    </template>  
-                </li>
-            </ul> 
-        -->
     	  <div id="cart">
       	    <!-- 1.checkout-title -->
       	    <header id="checkout-title">
-      	      <h2>购物车</h2>
+      	         <h2>购物车</h2>
       	    </header>
       	    <!-- 2.checkout-item-->
       	    <section id="cart-item">
@@ -45,10 +23,13 @@
               	            <div class="cart-tab1">
               	                <!--项目符号-->
               	                <!-- <svg></svg> -->
-                                <!-- 不使用input-checkbox的原因：试验用$set方法为元素添加属性 -->
+                                <!-- 不使用input-checkbox的原因：用$set方法为元素添加属性 -->
               	                <a href="javascript:void(0)" @click="selectItem(item)">
-              	                    <i
-              	                    :class="['iconfont',{'icon-notchecked':!item.isChecked},{'icon-checked':item.isChecked}]">
+              	                    <i :class="[
+                                                   'iconfont',
+                                                   {'icon-notchecked':!item.isChecked},
+                                                   {'icon-checked':item.isChecked}
+                                               ]">
                                     </i>
               	                </a>
                     	          <!--商品图片-->
@@ -58,10 +39,10 @@
                     	              <p class="item-title" v-text="item.productName"></p>
                     	              <!--赠送-->
                     	              <div class="item-include">
-                    	                <dl>
-                    	                  <dt>赠送：</dt>
-                    	                  <dd v-for="part in item.parts" v-text="part.partsName"></dd>
-                    	                </dl>
+                    	                  <dl>
+                    	                    <dt>赠送：</dt>
+                    	                    <dd v-for="part in item.parts" v-text="part.partsName"></dd>
+                    	                  </dl>
                     	              </div>
                     	          </div>
               	            </div> 
@@ -75,21 +56,28 @@
                   	        <div class="cart-tab3">
                     	          <div class="item-quantity">
                       	            <!-- 传入参数1或-1，就可以只使用一个函数-->
-                      	            <a href="javascript:void(0)" v-on:click="changeQuantity(item,-1)">-</a>
-                      	            <input type="text" disabled v-model="item.productQuantity">  <!-- 注意disabled,v-model的使用,不使用name属性-->
-                      	            <a href="javascript:void(0)" v-on:click="changeQuantity(item,1)">+</a>
+                      	            <a href="javascript:void(0)" 
+                                        v-on:click="changeQuantity(item,-1)">
+                                    -</a>
+                                    <!-- 注意disabled,v-model的使用,不使用name属性-->
+                                    <input type="text" disabled v-model="item.productQuantity"> 
+                      	            <a href="javascript:void(0)" 
+                                        v-on:click="changeQuantity(item,1)">
+                                    +</a>
                     	          </div>
                   	        </div>
               	            <!-- tab4 price-total-->
                   	        <div class="cart-tab4">
                   	            <p class="price-total">
-                  	                {{item.productPrice*item.productQuantity | formatMoney("元")}}
-                  	            </p>  <!-- 参数“yuan”传入过滤器-->                  
+                  	                <!-- 参数“yuan”传入过滤器-->   
+                                    {{item.productPrice*item.productQuantity 
+                                        | formatMoney("元")}}
+                  	            </p>                 
                   	        </div>
               	            <!-- tab5 edit-->
                   	        <div class="cart-tab5">
                   	            <i class="iconfont icon-delete" 
-                                @click="delItem(index)"> 
+                                    @click="delItem(index)"> 
                                 </i>
                   	        </div>
       	                </li>
@@ -100,15 +88,28 @@
       	    <div>
         	      <!--全选和取消全选-->
         	      <div class="item-all-check">
-        	          <a href="javascript:void(0)">
-        	          <i  
-        	          class="iconfont" 
-        	          :class="[{'icon-notchecked':!selectAllFlag},{'icon-checked':selectAllFlag}]" 
-                    @click="selectAll(true)">
-        	          </i>
+        	          <a 
+                        href="javascript:void(0)">
+            	          <i  
+            	              class="iconfont" 
+                	          :class="[
+                                        {'icon-notchecked':!selectAllFlag},
+                                        {'icon-checked':selectAllFlag}
+                                    ]" 
+                            @click="selectAll(true)">
+            	          </i>
         	          </a>
-        	          <a class="check-all-btn" href="javascript:void(0)" @click="selectAll(true)">全选</a>
-        	          <a href="javascript:void(0)" @click="selectAll(false)">取消全选</a>
+        	          <a
+                        class="check-all-btn" 
+                        href="javascript:void(0)" 
+                        @click="selectAll(true)">
+                        全选
+                    </a>
+        	          <a 
+                        href="javascript:void(0)" 
+                        @click="selectAll(false)">
+                        取消全选
+                    </a>
         	      </div>
         	      <!-- 结算总金额-->
         	      <div class="checkout-account">
@@ -125,9 +126,14 @@
         	      </div>
       	    </div>
         </div>
-        <!--   删除对话框组件 -->
+        
+        <!-- 4. 删除对话框组件 -->
         <!-- v-show控制出现，v-on自定义事件确认删除和取消删除 -->
-        <dialog-delete :isShow="isShowDialog" v-on:confirmDel="confirmDel" v-on:cancelDel="isShowDialog = false"></dialog-delete>
+        <dialog-delete 
+            :isShow="isShowDialog" 
+            v-on:confirmDel="confirmDel"
+             v-on:cancelDel="isShowDialog = false">
+        </dialog-delete>
     </div>
 </template>
 
@@ -135,26 +141,17 @@
 import dialogDelete from "./dialog-delete";
 export default {
     name:"home",
-    components:{
+    components: {
       dialogDelete
     },
     data() {
       return {
-        productList:[],
-        selectAllFlag:false,
-        isShowDialog:false,
-        deleteNth:0
+        productList: [],
+        selectAllFlag: false,
+        isShowDialog: false,
+        deleteNth: 0
       }
     },
-
-
-    // 注意使用$nextTick
-    mounted() {
-      this.$nextTick(function () {
-        this.cartView();
-      });
-    },
-
 
     // 总价钱计算,计算选中的(计算属性有watch功能)
     computed:{
@@ -184,16 +181,16 @@ export default {
 
 
     methods:{
+      // 从后端引入产品数据
       cartView() {
-        this.$axios.get("/api/result",{id:"productlist"})
+        this.$axios.get("/api/list",{id:"productlist"})
           .then(response => {
             // 箭头函数的this固定指向外层调用者
-            this.productList = response.data.data.list;
+            this.productList = response.data.data;
             // this.totalMoney = response.data.result.totalMoney;
           });
-          this.$axios.post("http://localhost:8080/api/result",{id:"productlist"})
+          this.$axios.post("/api/list",{id:"productlist"})
             .then(response => {
-              // 箭头函数的this固定指向外层调用者
               console.log(response);
             });
       },
@@ -266,7 +263,14 @@ export default {
         this.productList.splice(this.deleteNth,1);
         this.isShowDialog = false;
       }
-    }
+    },
+
+    // 注意使用$nextTick
+    mounted() {
+      this.$nextTick(function () {
+        this.cartView();
+      });
+    },
 }
 </script>
 
